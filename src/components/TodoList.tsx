@@ -73,7 +73,7 @@ const TodoList: FC<TodoListProps> = ({
   return (
     <div
       className={cn('overflow-auto h-full', {
-        'max-h-[300px]': todos?.length > 4
+        'max-h-[300px]': (todos?.length ?? 0) > 4
       })}
     >
       {todoList}

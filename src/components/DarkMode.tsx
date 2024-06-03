@@ -1,4 +1,5 @@
 import { Switch } from '@headlessui/react'
+import cn from 'clsx'
 import { useEffect, useState } from 'react'
 
 export default function DarkMode() {
@@ -37,11 +38,14 @@ export default function DarkMode() {
     <Switch
       checked={enabled}
       onChange={toggleMode}
-      className="group relative flex h-7 w-14 cursor-pointer rounded-full bg-gray-200 dark:bg-gray-700 p-1 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 dark:focus:ring-offset-gray-800 dark:focus:ring-gray-400"
+      className="relative flex h-7 w-14 cursor-pointer rounded-full bg-gray-200 dark:bg-gray-700 p-1 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 dark:focus:ring-offset-gray-800 dark:focus:ring-gray-400"
     >
       <span
         aria-hidden="true"
-        className="pointer-events-none inline-block size-5 translate-x-0 rounded-full bg-gray-800 dark:bg-gray-200 ring-0 shadow-lg transition duration-200 ease-in-out group-data-[checked]:translate-x-7"
+        className={cn(
+          'pointer-events-none inline-block size-5 rounded-full bg-gray-800 dark:bg-gray-200 ring-0 shadow-lg transition duration-200 ease-in-out',
+          enabled ? 'translate-x-7' : 'translate-x-0'
+        )}
       />
     </Switch>
   )

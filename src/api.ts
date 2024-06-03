@@ -24,7 +24,7 @@ const getDb = (): Promise<IDBPDatabase<TodoDB>> => {
 
 export const getTodos = async (): Promise<Todo[]> => {
   const db = await getDb()
-  return await db.getAll('todos')
+  return db.getAll('todos')
 }
 
 export const addTodo = async (todo: Todo): Promise<void> => {
@@ -37,8 +37,10 @@ export const addTodo = async (todo: Todo): Promise<void> => {
 }
 
 export const updateTodo = async (updatedTodo: Todo): Promise<void> => {
-  if (!updatedTodo) {
-    throw new Error('Updated todo cannot be null or undefined.')
+  if (updatedTodo?.id == null) {
+    throw new Error(
+      'Updated todo cannot be null or undefined, and it must have a valid ID.'
+    )
   }
 
   const db = await getDb()
@@ -69,11 +71,8 @@ export const saveCompletedTodos = async (
   const allTodos = await store.getAll()
 
   for (const todo of allTodos) {
-    if (completedTodos.includes(todo.id)) {
-      await store.put({ ...todo, completed: true })
-    } else {
-      await store.put({ ...todo, completed: false })
-    }
+    const isCompleted = completedTodos.includes(todo.id)
+    await store.put({ ...todo, completed: isCompleted })
   }
 
   await tx.done

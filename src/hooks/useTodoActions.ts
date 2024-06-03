@@ -12,8 +12,10 @@ import {
 import { todoReducer } from '../reducer'
 import type { Todo } from '../type'
 
-function useTodoActions() {
-  const { data: todos, mutate } = useSWR<Todo[]>('/api/todos', getTodos)
+const useTodoActions = () => {
+  const { data: todos, mutate } = useSWR<Todo[]>('/api/todos', getTodos, {
+    refreshInterval: 1000
+  })
   const [state, dispatch] = useReducer(todoReducer, {
     todos: [],
     completedTodos: []
@@ -35,8 +37,8 @@ function useTodoActions() {
   const handleAddTodo = useCallback(
     async (text: string) => {
       const trimmedText = text.trim()
-      if (!trimmedText || todos?.some(todo => todo.text === trimmedText)) {
-        toast.error('Todo text cannot be empty or duplicate.')
+      if (todos?.some(todo => todo.text === trimmedText)) {
+        toast.error('Todo text already exists.')
         return
       }
 
@@ -167,7 +169,6 @@ function useTodoActions() {
     (id: number) => {
       const newText = prompt('Enter the new text:')
       if (newText === null || newText.trim() === '') {
-        // User pressed cancel or entered an empty string, do nothing
         return
       }
 
