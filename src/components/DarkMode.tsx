@@ -1,5 +1,4 @@
 import { Switch } from '@headlessui/react'
-import cn from 'clsx'
 import { useEffect, useState } from 'react'
 
 export default function DarkMode() {
@@ -42,10 +41,7 @@ export default function DarkMode() {
     >
       <span
         aria-hidden="true"
-        className={cn(
-          'pointer-events-none inline-block size-5 rounded-full bg-gray-800 dark:bg-gray-200 ring-0 shadow-lg transition duration-200 ease-in-out',
-          enabled ? 'translate-x-7' : 'translate-x-0'
-        )}
+        className="pointer-events-none inline-block size-5 rounded-full bg-gray-800 dark:bg-gray-200 ring-0 shadow-lg transition duration-200 ease-in-out translate-x-0 dark:translate-x-7"
       />
     </Switch>
   )

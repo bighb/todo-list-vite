@@ -33,14 +33,12 @@ export const addTodo = async (todo: Todo): Promise<void> => {
   }
 
   const db = await getDb()
-  await db.put('todos', todo)
+  await db.add('todos', todo)
 }
 
 export const updateTodo = async (updatedTodo: Todo): Promise<void> => {
   if (updatedTodo?.id == null) {
-    throw new Error(
-      'Updated todo cannot be null or undefined, and it must have a valid ID.'
-    )
+    throw new Error('Updated todo must have a valid ID.')
   }
 
   const db = await getDb()
@@ -70,11 +68,12 @@ export const saveCompletedTodos = async (
   const store = tx.objectStore('todos')
   const allTodos = await store.getAll()
 
-  for (const todo of allTodos) {
+  const updatePromises = allTodos.map(todo => {
     const isCompleted = completedTodos.includes(todo.id)
-    await store.put({ ...todo, completed: isCompleted })
-  }
+    return store.put({ ...todo, completed: isCompleted })
+  })
 
+  await Promise.all(updatePromises)
   await tx.done
 }
 

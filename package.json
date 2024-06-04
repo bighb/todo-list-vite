@@ -35,11 +35,13 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.0.4",
+    "@heroicons/react": "^2.1.3",
     "clsx": "^2.1.1",
     "idb": "^8.0.0",
-    "million": "^3.1.6",
+    "million": "^3.1.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.51.5",
     "react-hot-toast": "^2.4.1",
     "swr": "^2.2.5",
     "tailwindcss": "^3.4.3"
@@ -47,11 +49,11 @@
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
     "@tailwindcss/forms": "^0.5.7",
-    "@types/node": "^20.12.12",
+    "@types/node": "^20.14.1",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "7.11.0",
-    "@typescript-eslint/parser": "7.11.0",
+    "@typescript-eslint/eslint-plugin": "7.12.0",
+    "@typescript-eslint/parser": "7.12.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
     "concurrently": "^8.2.2",
@@ -71,7 +73,7 @@
     "prettier": "3.3.0",
     "prettier-plugin-pkg": "0.18.1",
     "prettier-plugin-tailwindcss": "0.6.1",
-    "turbo": "^1.13.3",
+    "turbo": "^2.0.0",
     "typescript": "^5.4.5",
     "vite": "5.2.12"
   }
